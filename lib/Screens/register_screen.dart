@@ -103,24 +103,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             RoundedButton(
               btnText: 'Create Account',
               onBtnPressed: () => createAccountPressed(),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const LoginScreen(),
-                    ));
-              },
-              child: const Text(
-                'already have an account',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                ),
-              ),
             )
           ],
         ),

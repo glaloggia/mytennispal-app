@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:tests/Screens/register_screen.dart';
 import 'package:tests/Services/auth_services.dart';
 import 'package:tests/Services/globals.dart';
 import 'package:tests/rounded_button.dart';
@@ -41,11 +42,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.black,
-          centerTitle: true,
+          backgroundColor: Colors.blue,
+          centerTitle: false,
           elevation: 0,
           title: const Text(
-            'Login',
+            'myTennisPal',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -56,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
+              Spacer(),
               const SizedBox(
                 height: 20,
               ),
@@ -82,10 +84,30 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 30,
               ),
+              Spacer(),
               RoundedButton(
                 btnText: 'LOG IN',
                 onBtnPressed: () => loginPressed(),
-              )
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const RegisterScreen(),
+                      ));
+                },
+                child: const Text(
+                  'Don\'t have an account',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+              Spacer()
             ],
           ),
         ));
