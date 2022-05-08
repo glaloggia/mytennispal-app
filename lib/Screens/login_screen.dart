@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:tests/Screens/register_screen.dart';
 import 'package:tests/Services/auth_services.dart';
 import 'package:tests/Services/globals.dart';
@@ -25,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
       http.Response response = await AuthServices.login(_email, _password);
       Map responseMap = jsonDecode(response.body);
       if (response.statusCode == 200) {
+        await FlutterSession().set('token', responseMap.values.last);
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -57,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              Spacer(),
+              const Spacer(),
               const SizedBox(
                 height: 20,
               ),
@@ -84,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 30,
               ),
-              Spacer(),
+              const Spacer(),
               RoundedButton(
                 btnText: 'LOG IN',
                 onBtnPressed: () => loginPressed(),
@@ -107,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              Spacer()
+              const Spacer()
             ],
           ),
         ));

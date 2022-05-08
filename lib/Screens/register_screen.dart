@@ -1,13 +1,11 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tests/Services/auth_services.dart';
 import 'package:tests/Services/globals.dart';
 
 import '../rounded_button.dart';
 import 'home_screen.dart';
-import 'login_screen.dart';
 import 'package:http/http.dart' as http;
 
 class RegisterScreen extends StatefulWidget {

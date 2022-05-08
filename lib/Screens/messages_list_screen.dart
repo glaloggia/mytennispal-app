@@ -2,14 +2,22 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:http/http.dart' as http;
+import 'package:tests/Services/message_parser.dart';
+
+import 'message_details_screen.dart';
 
 Future<List<dynamic>> getJSON() async {
+
+  dynamic token = await FlutterSession().get('token');
+
   var headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer 37|1SZZdzVBNjij9gT1wAkxaPwyQbSdd7xQWGgzoHl8'
+    'Authorization': 'Bearer $token'
   };
+
 
   final response = await http
       .get(Uri.parse('http://localhost:8000/api/message'),headers: headers);
@@ -41,14 +49,9 @@ class _MessagesListScreenState extends State<MessagesListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Fetch Data Example',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: const Text('Fetch Data Example'),
+          title: const Text('myTennisPal - Inbox'),
         ),
         body: Center(
           child: FutureBuilder<List<dynamic>>(
@@ -59,15 +62,31 @@ class _MessagesListScreenState extends State<MessagesListScreen> {
                   case ConnectionState.waiting:
                     return const CircularProgressIndicator();
                   default:
-                    return ListView.builder(
+                    return ListView.separated(
                       itemCount: snapShot.data!.length,
                       itemBuilder: (context, index) {
-                        return Text(snapShot.data![index].toString());
+                        MessageParser aMessage = MessageParser.fromJson(snapShot.data![index]);
+                        var name = aMessage.name;
+                        var sent = aMessage.created_at;
+                        return ListTile(
+                          title: Text("From $name"),
+                          subtitle: Text("Sent: $sent"),
+                          onTap: () {
+                            setState(() {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => MessageDetailsScreen(aMessage))
+                              );
+                              }
+                            );
+                          });
+                      },
+                      separatorBuilder: (context, index) {
+                        return const Divider();
                       },
                     );
                 }}),
         ),
-      ),
     );
   }
 }

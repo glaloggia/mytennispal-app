@@ -29,11 +29,6 @@ class MessagesScreen extends StatelessWidget {
               },
             ),
             const Spacer(),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('SEND MESSAGE'),
-            ),
-            const Spacer(),
           ],
         ),
       ),

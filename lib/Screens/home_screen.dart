@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        title: Text('myTennisPal'),
+        title: const Text('myTennisPal'),
         automaticallyImplyLeading: false,
       ),
       body: Align(
@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.center,
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Spacer(),
+            const Spacer(),
             ElevatedButton(
               child: const Text('MESSAGES'),
               onPressed: () {
@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                 );
               },
             ),
-            Spacer(),
+            const Spacer(),
             ElevatedButton(
               onPressed: (){
                 Navigator.push(
@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               },
               child: const Text('MATCHES'),
             ),
-            Spacer(),
+            const Spacer(),
           ],
         ),
       ),
