@@ -2,22 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_session/flutter_session.dart';
 import 'package:http/http.dart' as http;
 import 'package:tests/Services/message_parser.dart';
 
+import '../Services/globals.dart';
 import 'message_details_screen.dart';
 
 Future<List<dynamic>> getJSON() async {
 
-  dynamic token = await FlutterSession().get('token');
-
-  var headers = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer $token'
-  };
-
+  var headers = await getMeHeaders();
 
   final response = await http
       .get(Uri.parse('http://localhost:8000/api/message'),headers: headers);
@@ -39,12 +32,12 @@ class MessagesListScreen extends StatefulWidget {
 }
 
 class _MessagesListScreenState extends State<MessagesListScreen> {
-  late Future<List<dynamic>> futureAlbum;
+  late Future<List<dynamic>> futureMessages;
 
   @override
   void initState() {
     super.initState();
-    futureAlbum = getJSON();
+    futureMessages = getJSON();
   }
 
   @override
@@ -55,7 +48,7 @@ class _MessagesListScreenState extends State<MessagesListScreen> {
         ),
         body: Center(
           child: FutureBuilder<List<dynamic>>(
-              future: futureAlbum,
+              future: futureMessages,
               builder: (context, snapShot) {
                 switch(snapShot.connectionState) {
                   case ConnectionState.none:
