@@ -7,7 +7,7 @@ class MatchesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        title: Text('myTennisPal - Matches'),
+        title: const Text('myTennisPal - Matches'),
       ),
       body: Align(
         alignment: Alignment.center,
@@ -16,37 +16,37 @@ class MatchesScreen extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.center,
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Spacer(),
+            const Spacer(),
             ElevatedButton(
               child: const Text('MY BOOKINGS'),
               onPressed: () {},
             ),
-            Spacer(),
+            const Spacer(),
             ElevatedButton(
               child: const Text('MAKE A BOOKING'),
               onPressed: () {},
             ),
-            Spacer(),
+            const Spacer(),
             ElevatedButton(
               onPressed: () {},
               child: const Text('CREATE MATCH'),
             ),
-            Spacer(),
+            const Spacer(),
             ElevatedButton(
               onPressed: () {},
               child: const Text('UPDATE MATCH'),
             ),
-            Spacer(),
+            const Spacer(),
             ElevatedButton(
               onPressed: () {},
               child: const Text('CREATE VENUE'),
             ),
-            Spacer(),
+            const Spacer(),
             ElevatedButton(
               onPressed: () {},
               child: const Text('DELETE VENUE'),
             ),
-            Spacer(),
+            const Spacer(),
           ],
         ),
       ),

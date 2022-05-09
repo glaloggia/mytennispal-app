@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'messages_list_screen.dart';
+
 class MessagesScreen extends StatelessWidget {
   const MessagesScreen({Key? key}) : super(key: key);
 
@@ -7,7 +9,7 @@ class MessagesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        title: Text('myTennisPal - Messages'),
+        title: const Text('myTennisPal - Messages'),
       ),
       body: Align(
         alignment: Alignment.center,
@@ -16,17 +18,17 @@ class MessagesScreen extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.center,
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Spacer(),
+            const Spacer(),
             ElevatedButton(
               child: const Text('MESSAGES LIST'),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  const MessagesListScreen()),
+                );
+              },
             ),
-            Spacer(),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('SEND MESSAGE'),
-            ),
-            Spacer(),
+            const Spacer(),
           ],
         ),
       ),
