@@ -17,7 +17,6 @@ class MessageServices {
       headers: headers,
       body: body,
     );
-    print(response.body);
     return response;
   }
 }

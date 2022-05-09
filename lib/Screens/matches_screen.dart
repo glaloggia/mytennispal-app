@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tests/Screens/venues_list_screen.dart';
+
+import 'create_venue_screen.dart';
 
 class MatchesScreen extends StatelessWidget {
   const MatchesScreen({Key? key}) : super(key: key);
@@ -12,9 +15,6 @@ class MatchesScreen extends StatelessWidget {
       body: Align(
         alignment: Alignment.center,
         child: Column(
-          // mainAxisSize: MainAxisSize.max,
-          // mainAxisAlignment: MainAxisAlignment.center,
-          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Spacer(),
             ElevatedButton(
@@ -38,13 +38,23 @@ class MatchesScreen extends StatelessWidget {
             ),
             const Spacer(),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CreateVenueScreen()),
+                );
+              },
               child: const Text('CREATE VENUE'),
             ),
             const Spacer(),
             ElevatedButton(
-              onPressed: () {},
-              child: const Text('DELETE VENUE'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const VenuesListScreen()),
+                );
+              },
+              child: const Text('VENUES LIST'),
             ),
             const Spacer(),
           ],
