@@ -33,3 +33,13 @@ Future<Map<String, String>> getMeHeaders() async {
   return headers;
 
 }
+
+Future<int> getMeUserId() async {
+
+  dynamic output = await FlutterSession().get('userId');
+
+  int userId = output;
+
+  return userId;
+
+}

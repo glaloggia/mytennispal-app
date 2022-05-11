@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tests/Screens/matches_screen.dart';
 import '../Services/venue_services.dart';
 
 
@@ -49,7 +50,10 @@ class CreateVenueScreen extends StatelessWidget {
                     child: const Text('Create'),
                     onPressed: () {
                       VenueServices.create(myNameController.text, myAddressController.text);
-                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const MatchesScreen()),
+                      );
                     },
                   ),
                   const Spacer(),

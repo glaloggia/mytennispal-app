@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tests/Screens/matches_screen.dart';
 import 'package:tests/Services/match_services.dart';
 import 'package:tests/Services/venue_services.dart';
 
@@ -59,8 +60,10 @@ class _CreateMatchDateScreenState extends State<CreateMatchDateScreen> {
                     + selectedDate.day.toString() + ' ' + selectedTime.hour.toString() + ':' + selectedTime.minute.toString()
                     + ':00';
                 MatchServices.create(widget.aVenue.id, fullDate);
-                Navigator.pop(context);
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MatchesScreen()),
+                );
               },
               child: const Text('CREATE MATCH'),
             ),

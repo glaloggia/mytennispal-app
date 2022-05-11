@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:tests/Screens/create_match_date_screen.dart';
+import 'package:tests/Screens/matches_screen.dart';
 import 'package:tests/Services/match_services.dart';
+import 'package:tests/Services/rsvp_services.dart';
+
+import '../Services/globals.dart';
 
 class MatchDetailsScreen extends StatelessWidget {
   final MatchParser aMatch;
 
-  const MatchDetailsScreen(this.aMatch, {Key? key}) : super(key: key);
+  MatchDetailsScreen(this.aMatch, {Key? key}) : super(key: key);
 
+  var futureId = getMeUserId();
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +25,18 @@ class MatchDetailsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const Spacer(),
-                  ElevatedButton(
-                    onPressed: () {
-
-                    },
+                  FutureBuilder<int>(
+                      future: futureId,
+                      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    return ElevatedButton(
                     child: const Text('BOOK A PLACE'),
-                  ),
+                    onPressed: () {
+                    RsvpServices.create(snapshot.data, aMatch.id);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const MatchesScreen()),
+                    );
+                  },);}),
                   const Spacer(),
                   ElevatedButton(
                     onPressed: () {

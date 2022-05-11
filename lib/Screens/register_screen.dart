@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:tests/Services/auth_services.dart';
 import 'package:tests/Services/globals.dart';
 
@@ -29,6 +30,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           await AuthServices.register(_name, _email, _password);
       Map responseMap = jsonDecode(response.body);
       if (response.statusCode == 200) {
+        await FlutterSession().set('token', responseMap.values.last);
+        await FlutterSession().set('userId', responseMap.values.first['id']);
         Navigator.push(
             context,
             MaterialPageRoute(
