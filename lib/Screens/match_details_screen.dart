@@ -14,6 +14,7 @@ class MatchDetailsScreen extends StatelessWidget {
     return Scaffold(
             appBar: AppBar(
               title: const Text('myTennisPal - Details from the match'),
+              automaticallyImplyLeading: false,
             ),
             body: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -24,14 +25,14 @@ class MatchDetailsScreen extends StatelessWidget {
                     onPressed: () {
 
                     },
-                    child: const Text('PENDING TO DEFINE'),
+                    child: const Text('BOOK A PLACE'),
                   ),
                   const Spacer(),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('CANCEL'),
+                    child: const Text('BACK TO THE LIST'),
                   ),
                   const Spacer(),
                   Row(

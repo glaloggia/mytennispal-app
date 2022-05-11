@@ -17,6 +17,7 @@ class VenueDetailsScreen extends StatelessWidget {
     return Scaffold(
             appBar: AppBar(
               title: Text('myTennisPal - Details from $venueName'),
+              automaticallyImplyLeading: false,
             ),
             body: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -48,7 +49,7 @@ class VenueDetailsScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('CANCEL'),
+                    child: const Text('BACK TO THE LIST'),
                   ),
                   const Spacer(),
                   Row(

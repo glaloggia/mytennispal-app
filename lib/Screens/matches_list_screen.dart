@@ -43,10 +43,12 @@ class _MatchesListScreenState extends State<MatchesListScreen> {
                       MatchParser aMatch = MatchParser.fromJson(snapShot.data![index]);
                       var eventDate = aMatch.eventDate;
                       var venueName = aMatch.venueName;
+                      var matchId = aMatch.id.toString();
                       return ListTile(
                           leading: const Icon(Icons.sports_tennis),
                           title: Text("Date and Time: $eventDate"),
-                          subtitle: Text("Venue: $venueName"),
+                          trailing: Text("Event #: $matchId"),
+                          subtitle: Text('Venue: $venueName'),
                           onTap: () {
                             setState(() {
                               Navigator.push(
