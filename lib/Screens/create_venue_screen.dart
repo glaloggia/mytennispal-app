@@ -46,7 +46,7 @@ class CreateVenueScreen extends StatelessWidget {
                 children: [
                   const Spacer(),
                   ElevatedButton(
-                    child: const Text('Send'),
+                    child: const Text('Create'),
                     onPressed: () {
                       VenueServices.create(myNameController.text, myAddressController.text);
                       Navigator.pop(context);

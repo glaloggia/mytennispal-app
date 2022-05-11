@@ -1,30 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:tests/Screens/venue_details_screen.dart';
 import 'package:tests/Services/venue_services.dart';
 
-import '../Services/globals.dart';
-
-
-
-Future<List<dynamic>> getList() async {
-
-  var headers = await getMeHeaders();
-
-  final response = await http
-      .get(Uri.parse('http://localhost:8000/api/venue'),headers: headers);
-
-  if (response.statusCode == 200) {
-    var responseBody = response.body;
-    List<dynamic> itemsList = jsonDecode(responseBody);
-    return itemsList;
-  } else {
-    throw Exception('Failed to load venues');
-  }
-}
 
 class VenuesListScreen extends StatefulWidget {
   const VenuesListScreen({Key? key}) : super(key: key);
@@ -39,7 +18,7 @@ class _VenuesListScreenState extends State<VenuesListScreen> {
   @override
   void initState() {
     super.initState();
-    futureVenues = getList();
+    futureVenues = VenueServices.getList();
   }
 
   @override

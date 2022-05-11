@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:tests/Services/globals.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,7 +24,7 @@ class VenueServices {
     return response;
   }
 
-  static Future<http.Response> delete(int id) async {
+  static Future<http.Response> delete(BuildContext context,int id) async {
 
     var url = Uri.parse(baseURL + 'venue/' + id.toString());
     var headers = await getMeHeaders();
@@ -32,9 +33,29 @@ class VenueServices {
       url,
       headers: headers
     );
-
+    var error = response.statusCode;
+    if (response.statusCode != 200 && response.statusCode != 204 ) {
+      errorSnackBar(context, 'Error $error, venue is in use!');
+    }
     return response;
   }
+
+  static Future<List<dynamic>> getList() async {
+
+    var headers = await getMeHeaders();
+
+    final response = await http
+        .get(Uri.parse('http://localhost:8000/api/venue'),headers: headers);
+
+    if (response.statusCode == 200) {
+      var responseBody = response.body;
+      List<dynamic> itemsList = jsonDecode(responseBody);
+      return itemsList;
+    } else {
+      throw Exception('Failed to load venues');
+    }
+  }
+
 }
 
 

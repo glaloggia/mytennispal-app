@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tests/Services/venue_services.dart';
 
+import 'create_match_date_screen.dart';
+
 class VenueDetailsScreen extends StatelessWidget {
   final VenueParser aVenue;
 
@@ -21,7 +23,8 @@ class VenueDetailsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const Spacer(),
-                  const Text("Address:"),
+                  const Spacer(),
+                  const Text("ADDRESS:"),
                   const Spacer(),
                   Container(child: Text(venueAddress),
                     decoration: BoxDecoration(
@@ -29,27 +32,43 @@ class VenueDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
+                  const Spacer(),
+                  const Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CreateMatchDateScreen(aVenue))
+                      );
+                    },
+                    child: const Text('CREATE MATCH IN HERE'),
+                  ),
+                  const Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('CANCEL'),
+                  ),
+                  const Spacer(),
                   Row(
                     children: [
                       const Spacer(),
                       ElevatedButton(
-                        child: const Text('Delete'),
+                        child: const Text('DELETE VENUE'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red,
+                        ),
                         onPressed: () {
-                          VenueServices.delete(venueId);
+                          VenueServices.delete(context, venueId);
                           Navigator.pop(context);
                           Navigator.pop(context);
                         },
-                      ),
-                      const Spacer(),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('Cancel'),
                       ),
                       const Spacer(),
                     ],
                   ),
+                  const Spacer(),
                   const Spacer(),
                 ],
               ),
