@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tests/Screens/matches_list_screen.dart';
 import 'package:tests/Screens/venues_list_screen.dart';
 
+import 'create_match_screen.dart';
+import 'create_rsvp_screen.dart';
 import 'create_venue_screen.dart';
 
 class MatchesScreen extends StatelessWidget {
@@ -24,17 +27,32 @@ class MatchesScreen extends StatelessWidget {
             const Spacer(),
             ElevatedButton(
               child: const Text('MAKE A BOOKING'),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CreateRsvpScreen()),
+                );
+              },
             ),
             const Spacer(),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CreateMatchScreen()),
+                );
+              },
               child: const Text('CREATE MATCH'),
             ),
             const Spacer(),
             ElevatedButton(
-              onPressed: () {},
-              child: const Text('UPDATE MATCH'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MatchesListScreen()),
+                );
+              },
+              child: const Text('MATCHES LIST'),
             ),
             const Spacer(),
             ElevatedButton(

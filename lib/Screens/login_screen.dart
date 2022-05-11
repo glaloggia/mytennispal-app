@@ -25,8 +25,10 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_email.isNotEmpty && _password.isNotEmpty) {
       http.Response response = await AuthServices.login(_email, _password);
       Map responseMap = jsonDecode(response.body);
+
       if (response.statusCode == 200) {
         await FlutterSession().set('token', responseMap.values.last);
+        await FlutterSession().set('userId', responseMap.values.first['id']);
         Navigator.push(
             context,
             MaterialPageRoute(

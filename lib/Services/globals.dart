@@ -12,6 +12,14 @@ errorSnackBar(BuildContext context, String text) {
   ));
 }
 
+okSnackBar(BuildContext context, String text) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    backgroundColor: Colors.green,
+    content: Text(text),
+    duration: const Duration(seconds: 1),
+  ));
+}
+
 Future<Map<String, String>> getMeHeaders() async {
 
   dynamic token = await FlutterSession().get('token');
@@ -23,5 +31,15 @@ Future<Map<String, String>> getMeHeaders() async {
   };
 
   return headers;
+
+}
+
+Future<int> getMeUserId() async {
+
+  dynamic output = await FlutterSession().get('userId');
+
+  int userId = output;
+
+  return userId;
 
 }
