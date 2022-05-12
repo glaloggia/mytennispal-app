@@ -1,35 +1,34 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:tests/Screens/venue_details_screen.dart';
-import 'package:tests/Services/venue_services.dart';
+import 'package:tests/Services/rsvp_services.dart';
 
 
-class VenuesListScreen extends StatefulWidget {
-  const VenuesListScreen({Key? key}) : super(key: key);
+class RsvpsListScreen extends StatefulWidget {
+  const RsvpsListScreen({Key? key}) : super(key: key);
 
   @override
-  _VenuesListScreenState createState() => _VenuesListScreenState();
+  _RsvpsListScreenState createState() => _RsvpsListScreenState();
 }
 
-class _VenuesListScreenState extends State<VenuesListScreen> {
-  late Future<List<dynamic>> futureVenues;
+class _RsvpsListScreenState extends State<RsvpsListScreen> {
+  late Future<List<dynamic>> futureRsvps;
 
   @override
   void initState() {
     super.initState();
-    futureVenues = VenueServices.getList();
+    futureRsvps = RsvpServices.getList();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('myTennisPal - Venues List'),
+          title: const Text('myTennisPal - my bookings'),
         ),
         body: Center(
           child: FutureBuilder<List<dynamic>>(
-              future: futureVenues,
+              future: futureRsvps,
               builder: (context, snapShot) {
                 switch(snapShot.connectionState) {
                   case ConnectionState.none:
@@ -39,16 +38,17 @@ class _VenuesListScreenState extends State<VenuesListScreen> {
                     return ListView.separated(
                       itemCount: snapShot.data!.length,
                       itemBuilder: (context, index) {
-                        VenueParser aVenue = VenueParser.fromJson(snapShot.data![index]);
-                        var name = aVenue.name;
+                        RsvpParser aRsvp = RsvpParser.fromJson(snapShot.data![index]);
+                        print(aRsvp);
+                        var name = aRsvp.id;
                         return ListTile(
                           title: Text("Name: $name"),
                           onTap: () {
                             setState(() {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => VenueDetailsScreen(aVenue))
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(builder: (context) => RsvpDetailsScreen(aRsvp))
+                              // );
                               }
                             );
                           });
