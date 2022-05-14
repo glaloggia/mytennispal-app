@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:tests/Screens/rsvps_attendance_screen.dart';
 import 'package:tests/Services/rsvp_services.dart';
 
 
@@ -39,16 +40,15 @@ class _RsvpsListScreenState extends State<RsvpsListScreen> {
                       itemCount: snapShot.data!.length,
                       itemBuilder: (context, index) {
                         RsvpParser aRsvp = RsvpParser.fromJson(snapShot.data![index]);
-                        print(aRsvp);
-                        var name = aRsvp.id;
+                        var eventId = aRsvp.eventId;
                         return ListTile(
-                          title: Text("Name: $name"),
+                          title: Text("Event Id: $eventId"),
                           onTap: () {
                             setState(() {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(builder: (context) => RsvpDetailsScreen(aRsvp))
-                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => RsvpsAttendanceScreen(eventId))
+                              );
                               }
                             );
                           });
