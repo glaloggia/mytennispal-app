@@ -3,9 +3,10 @@ import 'package:tests/Services/globals.dart';
 import 'package:http/http.dart' as http;
 
 class MessageServices {
-  static Future<http.Response> send(int userFrom, int userTo, String content) async {
+  static Future<http.Response> send(int userTo, String content) async {
+    var myUserId = await getMeUserId();
     Map data = {
-      "userFrom": userFrom,
+      "userFrom": myUserId,
       "userTo": userTo,
       "content": content,
     };

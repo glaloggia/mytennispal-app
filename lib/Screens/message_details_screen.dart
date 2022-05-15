@@ -38,7 +38,7 @@ class MessageDetailsScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => CreateMessageScreen(aMessage)),
+                            MaterialPageRoute(builder: (context) => CreateMessageScreen(aMessage.userFrom,aMessage.name)),
                           );
                         },
                       ),

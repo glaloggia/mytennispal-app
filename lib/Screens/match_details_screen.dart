@@ -31,7 +31,7 @@ class MatchDetailsScreen extends StatelessWidget {
                     return ElevatedButton(
                     child: const Text('BOOK A PLACE'),
                     onPressed: () {
-                    RsvpServices.create(snapshot.data, aMatch.id);
+                    RsvpServices.create(context, snapshot.data, aMatch.id);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const MatchesScreen()),

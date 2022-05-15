@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tests/Services/message_parser.dart';
-
 import '../Services/message_services.dart';
 
 
 class CreateMessageScreen extends StatelessWidget {
-  const CreateMessageScreen(this.aMessage, {Key? key}) : super(key: key);
-  final MessageParser aMessage;
+  const CreateMessageScreen(this.userTo, this.name, {Key? key}) : super(key: key);
+  final int userTo;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
-    var name = aMessage.name;
     var myController = TextEditingController();
     return  Scaffold(
       appBar: AppBar(
@@ -39,7 +37,7 @@ class CreateMessageScreen extends StatelessWidget {
                   ElevatedButton(
                     child: const Text('Send'),
                     onPressed: () {
-                      MessageServices.send(aMessage.userTo, aMessage.userFrom, myController.text);
+                      MessageServices.send(userTo, myController.text);
                       Navigator.pop(context);
                       Navigator.pop(context);
                     },
