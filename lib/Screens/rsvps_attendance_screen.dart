@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:tests/Screens/create_message_screen.dart';
+import 'package:tests/Screens/matches_screen.dart';
 import 'package:tests/Services/rsvp_services.dart';
 import 'package:tests/Services/user_services.dart';
+
+import '../Services/match_services.dart';
 
 
 class RsvpsAttendanceScreen extends StatefulWidget {
@@ -16,11 +19,13 @@ class RsvpsAttendanceScreen extends StatefulWidget {
 
 class _RsvpsAttendanceScreenState extends State<RsvpsAttendanceScreen> {
   late Future<List<dynamic>> futureAttendance;
+  late Future<MatchParser> futureEvent;
 
   @override
   void initState() {
     super.initState();
     futureAttendance = RsvpServices.getAttendance(widget.eventId);
+    futureEvent = MatchServices.getMeAnEvent(widget.eventId);
   }
 
   @override
@@ -45,6 +50,33 @@ class _RsvpsAttendanceScreenState extends State<RsvpsAttendanceScreen> {
                         var name = aUser.name;
                         return ListTile(
                           title: Text("Player Name: $name"),
+                          leading:
+                          FutureBuilder<MatchParser>(
+                            future: futureEvent,
+                            builder: (context,snapshot){
+                              if(snapshot.hasData) {
+                                if (snapshot.data!.winnerId == 0) {
+                                  return IconButton(
+                                    icon: Icon(
+                                      Icons.emoji_events_sharp,
+                                      size: 20.0,
+                                      color: Colors.brown[900],
+                                    ),
+                                    onPressed: () {
+                                      MatchServices.updateWinner(
+                                          widget.eventId, aUser.id);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const MatchesScreen()));
+                                    },
+                                  );
+                                }
+                              }
+                              return const Text("");
+                            }
+                          ),
                           trailing: IconButton(
                             icon: Icon(
                               Icons.mail,
@@ -64,7 +96,9 @@ class _RsvpsAttendanceScreenState extends State<RsvpsAttendanceScreen> {
                         return const Divider();
                       },
                     );
-                }}),
+                }
+              }
+              ),
         ),
     );
   }

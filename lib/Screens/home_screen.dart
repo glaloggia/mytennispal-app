@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tests/Screens/ranking_screen.dart';
 
 import 'matches_screen.dart';
 import 'messages_screen.dart';
@@ -39,6 +40,16 @@ class HomeScreen extends StatelessWidget {
                 );
               },
               child: const Text('MATCHES'),
+            ),
+            const Spacer(),
+            ElevatedButton(
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const RankingScreen()),
+                );
+              },
+              child: const Text('RANKING'),
             ),
             const Spacer(),
           ],

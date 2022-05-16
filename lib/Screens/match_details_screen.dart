@@ -5,6 +5,7 @@ import 'package:tests/Services/rsvp_services.dart';
 
 import '../Services/globals.dart';
 
+
 class MatchDetailsScreen extends StatelessWidget {
   final MatchParser aMatch;
 
@@ -28,15 +29,18 @@ class MatchDetailsScreen extends StatelessWidget {
                   FutureBuilder<int>(
                       future: futureId,
                       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                    return ElevatedButton(
-                    child: const Text('BOOK A PLACE'),
-                    onPressed: () {
-                    RsvpServices.create(context, snapshot.data, aMatch.id);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const MatchesScreen()),
-                    );
-                  },);}),
+                          return ElevatedButton(
+                            child: const Text('BOOK A PLACE'),
+                            onPressed: () {
+                              RsvpServices.create(context, snapshot.data, aMatch.id);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const MatchesScreen()),
+                              );
+                          },
+                        );
+                      }
+                  ),
                   const Spacer(),
                   ElevatedButton(
                     onPressed: () {
@@ -46,8 +50,8 @@ class MatchDetailsScreen extends StatelessWidget {
                   ),
                   const Spacer(),
                   Row(
-                    children: [
-                      const Spacer(),
+                    children: const [
+                      Spacer(),
                     ],
                   ),
                   const Spacer(),
