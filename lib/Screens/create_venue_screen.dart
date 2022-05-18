@@ -49,7 +49,7 @@ class CreateVenueScreen extends StatelessWidget {
                   ElevatedButton(
                     child: const Text('Create'),
                     onPressed: () {
-                      VenueServices.create(myNameController.text, myAddressController.text);
+                      VenueServices.create(context, myNameController.text, myAddressController.text);
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const MatchesScreen()),
