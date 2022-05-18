@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:tests/Screens/match_details_screen.dart';

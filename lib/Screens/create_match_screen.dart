@@ -18,7 +18,7 @@ class CreateMatchScreen extends StatelessWidget {
           children: [
             const Spacer(),
             const Spacer(),
-            Text('SELECT A VENUE:'),
+            const Text('SELECT A VENUE:'),
             const Spacer(),
             ElevatedButton(
               onPressed: () {

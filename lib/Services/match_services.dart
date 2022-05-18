@@ -7,7 +7,8 @@ class MatchServices {
 
     Map data = {
       "venueId": venueId,
-      "eventDate": date
+      "eventDate": date,
+      "winnerId":0
     };
 
     var body = json.encode(data);
@@ -40,7 +41,7 @@ class MatchServices {
     var headers = await getMeHeaders();
 
     final response = await http
-        .get(Uri.parse('http://localhost:8000/api/event'),headers: headers);
+        .get(Uri.parse(baseURL + 'event'),headers: headers);
 
     if (response.statusCode == 200) {
       var responseBody = response.body;
@@ -50,17 +51,78 @@ class MatchServices {
       throw Exception('Failed to load Matches');
     }
   }
+
+  static Future<void> updateWinner(int eventId,int userId) async {
+
+    var venueId = await getVenueIdFromEvent(eventId);
+
+    Map data = {
+      "venueId": venueId,
+      "winnerId": userId
+    };
+
+    var body = json.encode(data);
+    var url = Uri.parse(baseURL + 'event/' + eventId.toString());
+    var headers = await getMeHeaders();
+
+    http.Response response = await http.put(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+  }
+
+  static Future<int> getVenueIdFromEvent(int eventId) async {
+
+      int anEvent;
+
+      var url = Uri.parse(baseURL + 'event/' + eventId.toString());
+      var headers = await getMeHeaders();
+
+      http.Response response = await http.get(
+          url,
+          headers: headers
+      );
+      var responseBody = response.body;
+
+      anEvent = jsonDecode(responseBody)['venueId'];
+
+      return anEvent;
+  }
+
+  static Future<MatchParser> getMeAnEvent(int eventId) async {
+
+      var anEvent;
+
+      var url = Uri.parse(baseURL + 'event/' + eventId.toString());
+      var headers = await getMeHeaders();
+
+      http.Response response = await http.get(
+          url,
+          headers: headers
+      );
+      var responseBody = response.body;
+
+      anEvent = jsonDecode(responseBody);
+
+      return MatchParser(id: anEvent['id'], venueId: anEvent['venueId'], winnerId: anEvent['winnerId'], eventDate: anEvent['eventDate'], venueName: anEvent['venueName']);
+  }
+
 }
+
 
 class MatchParser {
   final int id;
   final int venueId;
+  final int winnerId;
   final String eventDate;
   final String venueName;
 
   const MatchParser({
     required this.id,
     required this.venueId,
+    required this.winnerId,
     required this.eventDate,
     required this.venueName
   });
@@ -69,6 +131,7 @@ class MatchParser {
     return MatchParser(
       id: json['id'] as int,
       venueId: json['venueId'] as int,
+      winnerId: json['winnerId'] as int,
       eventDate: json['eventDate'] as String,
       venueName: json['venueName'] as String
     );
