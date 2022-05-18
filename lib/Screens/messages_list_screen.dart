@@ -3,7 +3,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:tests/Services/message_parser.dart';
+import 'package:tests/Screens/matches_screen.dart';
+import 'package:tests/Services/message_services.dart';
 
 import '../Services/globals.dart';
 import 'message_details_screen.dart';
@@ -60,6 +61,7 @@ class _MessagesListScreenState extends State<MessagesListScreen> {
                       itemBuilder: (context, index) {
                         MessageParser aMessage = MessageParser.fromJson(snapShot.data![index]);
                         var name = aMessage.name;
+                        var messageId = aMessage.id;
                         var sent = aMessage.created_at;
                         return ListTile(
                           title: Text("From $name"),
@@ -72,7 +74,23 @@ class _MessagesListScreenState extends State<MessagesListScreen> {
                               );
                               }
                             );
-                          });
+                          },
+                          trailing: IconButton(
+                            icon: Icon(
+                              Icons.delete,
+                              size: 20.0,
+                              color: Colors.brown[900],
+                            ),
+                            onPressed: () {
+                              MessageServices.delete(context,messageId);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                      const MatchesScreen()));
+                            },
+                          ),
+                          );
                       },
                       separatorBuilder: (context, index) {
                         return const Divider();
