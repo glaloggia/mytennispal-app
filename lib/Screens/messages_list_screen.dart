@@ -13,7 +13,7 @@ Future<List<dynamic>> getJSON() async {
   var headers = await getMeHeaders();
 
   final response = await http
-      .get(Uri.parse('http://localhost:8000/api/message'),headers: headers);
+      .get(Uri.parse(baseURL + 'message'),headers: headers);
 
   if (response.statusCode == 200) {
     var responseBody = response.body;

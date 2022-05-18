@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:tests/Screens/match_details_screen.dart';
+import 'package:tests/Screens/matches_screen.dart';
 import 'package:tests/Services/match_services.dart';
 
 
@@ -44,9 +45,23 @@ class _MatchesListScreenState extends State<MatchesListScreen> {
                       var venueName = aMatch.venueName;
                       var matchId = aMatch.id.toString();
                       return ListTile(
-                          leading: const Icon(Icons.sports_tennis),
+                          leading: Text("Event #: $matchId"),
                           title: Text("Date and Time: $eventDate"),
-                          trailing: Text("Event #: $matchId"),
+                          trailing: IconButton(
+                            icon: Icon(
+                              Icons.delete,
+                              size: 20.0,
+                              color: Colors.brown[900],
+                            ),
+                            onPressed: () {
+                              MatchServices.delete(context, aMatch.id);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                builder: (context) =>
+                                const MatchesScreen())
+                              );
+                            },),
                           subtitle: Text('Venue: $venueName'),
                           onTap: () {
                             setState(() {
@@ -56,7 +71,8 @@ class _MatchesListScreenState extends State<MatchesListScreen> {
                               );
                             }
                             );
-                          });
+                          }
+                      );
                     },
                     separatorBuilder: (context, index) {
                       return const Divider();

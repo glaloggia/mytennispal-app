@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:tests/Services/globals.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,7 +24,7 @@ class MatchServices {
     return response;
   }
 
-  static Future<http.Response> delete(int id) async {
+  static Future<http.Response> delete(BuildContext context, int id) async {
 
     var url = Uri.parse(baseURL + 'event/' + id.toString());
     var headers = await getMeHeaders();
@@ -32,7 +33,10 @@ class MatchServices {
       url,
       headers: headers
     );
-
+    var error = response.statusCode;
+    if (response.statusCode != 200 && response.statusCode != 204 ) {
+      errorSnackBar(context, 'Error $error, match has bookings already!');
+    }
     return response;
   }
 
