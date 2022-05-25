@@ -83,11 +83,8 @@ class _MessagesListScreenState extends State<MessagesListScreen> {
                             ),
                             onPressed: () {
                               MessageServices.delete(context,messageId);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                      const MatchesScreen()));
+                              Navigator.pop(context);
+                              Navigator.pop(context);
                             },
                           ),
                           );

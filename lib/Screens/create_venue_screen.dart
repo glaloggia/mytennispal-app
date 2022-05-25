@@ -50,10 +50,7 @@ class CreateVenueScreen extends StatelessWidget {
                     child: const Text('Create'),
                     onPressed: () {
                       VenueServices.create(context, myNameController.text, myAddressController.text);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const MatchesScreen()),
-                      );
+                      Navigator.pop(context);
                     },
                   ),
                   const Spacer(),

@@ -39,7 +39,6 @@ class CreateMessageScreen extends StatelessWidget {
                     onPressed: () {
                       MessageServices.send(userTo, myController.text);
                       Navigator.pop(context);
-                      Navigator.pop(context);
                     },
                   ),
                   const Spacer(),

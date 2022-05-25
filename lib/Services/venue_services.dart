@@ -21,7 +21,7 @@ class VenueServices {
       body: body,
     );
     var error = response.statusCode;
-    if (response.statusCode != 200 && response.statusCode != 204 ) {
+    if (response.statusCode != 200 && response.statusCode != 201 ) {
       errorSnackBar(context, 'Error $error, venue already exists!');
     }
     return response;

@@ -65,11 +65,7 @@ class _RsvpsAttendanceScreenState extends State<RsvpsAttendanceScreen> {
                                     onPressed: () {
                                       MatchServices.updateWinner(
                                           widget.eventId, aUser.id);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const MatchesScreen()));
+                                      Navigator.pop(context);
                                     },
                                   );
                                 }
