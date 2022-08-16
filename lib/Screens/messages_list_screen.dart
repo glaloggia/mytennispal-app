@@ -3,7 +3,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:tests/Services/message_parser.dart';
+import 'package:tests/Screens/matches_screen.dart';
+import 'package:tests/Services/message_services.dart';
 
 import '../Services/globals.dart';
 import 'message_details_screen.dart';
@@ -13,7 +14,7 @@ Future<List<dynamic>> getJSON() async {
   var headers = await getMeHeaders();
 
   final response = await http
-      .get(Uri.parse('http://localhost:8000/api/message'),headers: headers);
+      .get(Uri.parse(baseURL + 'message'),headers: headers);
 
   if (response.statusCode == 200) {
     var responseBody = response.body;
@@ -60,6 +61,7 @@ class _MessagesListScreenState extends State<MessagesListScreen> {
                       itemBuilder: (context, index) {
                         MessageParser aMessage = MessageParser.fromJson(snapShot.data![index]);
                         var name = aMessage.name;
+                        var messageId = aMessage.id;
                         var sent = aMessage.created_at;
                         return ListTile(
                           title: Text("From $name"),
@@ -72,7 +74,20 @@ class _MessagesListScreenState extends State<MessagesListScreen> {
                               );
                               }
                             );
-                          });
+                          },
+                          trailing: IconButton(
+                            icon: Icon(
+                              Icons.delete,
+                              size: 20.0,
+                              color: Colors.brown[900],
+                            ),
+                            onPressed: () {
+                              MessageServices.delete(context,messageId);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                          ),
+                          );
                       },
                       separatorBuilder: (context, index) {
                         return const Divider();

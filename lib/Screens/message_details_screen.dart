@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tests/Screens/create_message_screen.dart';
-import 'package:tests/Services/message_parser.dart';
+import 'package:tests/Services/message_services.dart';
 
 
 class MessageDetailsScreen extends StatelessWidget {

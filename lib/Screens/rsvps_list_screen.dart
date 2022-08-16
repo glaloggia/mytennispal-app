@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:tests/Screens/matches_screen.dart';
 import 'package:tests/Screens/rsvps_attendance_screen.dart';
 import 'package:tests/Services/rsvp_services.dart';
 
@@ -41,8 +42,9 @@ class _RsvpsListScreenState extends State<RsvpsListScreen> {
                       itemBuilder: (context, index) {
                         RsvpParser aRsvp = RsvpParser.fromJson(snapShot.data![index]);
                         var eventId = aRsvp.eventId;
+                        var rsvpId = aRsvp.id;
                         return ListTile(
-                          title: Text("Event Id: $eventId"),
+                          title: Text("Event Id: $eventId - RSVP Id: $rsvpId"),
                           onTap: () {
                             setState(() {
                               Navigator.push(
@@ -51,7 +53,23 @@ class _RsvpsListScreenState extends State<RsvpsListScreen> {
                               );
                               }
                             );
-                          });
+                          },
+                          trailing: IconButton(
+                            icon: Icon(
+                              Icons.delete,
+                              size: 20.0,
+                              color: Colors.brown[900],
+                            ),
+                            onPressed: () {
+                              RsvpServices.delete(rsvpId);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                      const MatchesScreen()));
+                            },
+                          ),
+                          );
                       },
                       separatorBuilder: (context, index) {
                         return const Divider();

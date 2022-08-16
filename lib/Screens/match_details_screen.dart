@@ -32,13 +32,12 @@ class MatchDetailsScreen extends StatelessWidget {
                           return ElevatedButton(
                             child: const Text('BOOK A PLACE'),
                             onPressed: () {
-                              RsvpServices.create(context, snapshot.data, aMatch.id);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const MatchesScreen()),
-                              );
-                          },
-                        );
+                            RsvpServices.create(context, snapshot.data, aMatch.id);
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            }
+                          );
                       }
                   ),
                   const Spacer(),

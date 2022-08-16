@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:tests/Screens/matches_screen.dart';
 import 'package:tests/Screens/venue_details_screen.dart';
 import 'package:tests/Services/venue_services.dart';
 
@@ -41,6 +42,7 @@ class _VenuesListScreenState extends State<VenuesListScreen> {
                       itemBuilder: (context, index) {
                         VenueParser aVenue = VenueParser.fromJson(snapShot.data![index]);
                         var name = aVenue.name;
+                        var venueId = aVenue.id;
                         return ListTile(
                           title: Text("Name: $name"),
                           onTap: () {
@@ -51,7 +53,23 @@ class _VenuesListScreenState extends State<VenuesListScreen> {
                               );
                               }
                             );
-                          });
+                          },
+                          trailing: IconButton(
+                            icon: Icon(
+                              Icons.delete,
+                              size: 20.0,
+                              color: Colors.brown[900],
+                            ),
+                            onPressed: () {
+                              VenueServices.delete(context,venueId);
+                              Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                              builder: (context) =>
+                              const MatchesScreen()));
+                            },
+                          ),
+                        );
                       },
                       separatorBuilder: (context, index) {
                         return const Divider();

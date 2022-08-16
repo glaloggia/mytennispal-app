@@ -11,7 +11,6 @@ class VenueDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var venueId = aVenue.id;
     var venueName = aVenue.name;
     var venueAddress = aVenue.address;
     return Scaffold(
@@ -53,20 +52,10 @@ class VenueDetailsScreen extends StatelessWidget {
                   ),
                   const Spacer(),
                   Row(
-                    children: [
-                      const Spacer(),
-                      ElevatedButton(
-                        child: const Text('DELETE VENUE'),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.red,
-                        ),
-                        onPressed: () {
-                          VenueServices.delete(context, venueId);
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
-                      ),
-                      const Spacer(),
+                    children: const [
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
                     ],
                   ),
                   const Spacer(),

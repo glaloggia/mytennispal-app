@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 
-const String baseURL = "http://127.0.0.1:8000/api/"; //emulator localhost
-// const Map<String, String> headers = {"Content-Type": "application/json"};
+// const String baseURL = "http://10.0.2.2:8000/api/"; //emulator localhost
+const String baseURL = "http://127.0.0.1:8000/api/"; //WEB localhost
 
 errorSnackBar(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(

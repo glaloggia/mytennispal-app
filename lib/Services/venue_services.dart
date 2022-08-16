@@ -4,7 +4,7 @@ import 'package:tests/Services/globals.dart';
 import 'package:http/http.dart' as http;
 
 class VenueServices {
-  static Future<http.Response> create(String name, String address) async {
+  static Future<http.Response> create(BuildContext context, String name, String address) async {
 
     Map data = {
       "name": name,
@@ -20,7 +20,10 @@ class VenueServices {
       headers: headers,
       body: body,
     );
-
+    var error = response.statusCode;
+    if (response.statusCode != 200 && response.statusCode != 201 ) {
+      errorSnackBar(context, 'Error $error, venue already exists!');
+    }
     return response;
   }
 
@@ -45,7 +48,7 @@ class VenueServices {
     var headers = await getMeHeaders();
 
     final response = await http
-        .get(Uri.parse('http://localhost:8000/api/venue'),headers: headers);
+        .get(Uri.parse(baseURL + 'venue'),headers: headers);
 
     if (response.statusCode == 200) {
       var responseBody = response.body;
